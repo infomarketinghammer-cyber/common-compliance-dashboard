@@ -110,26 +110,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <aside className="w-72 bg-brand-gradient text-white flex flex-col shrink-0 border-r border-teal-800/30 h-full select-none z-20">
       {/* Branding Header */}
       <div className="bg-transparent px-5 py-3.5 border-b border-teal-800/30 shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-28 flex items-center justify-center">
-            <img 
-              src="/logo.jpeg" 
-              alt="Brick Four Logo" 
-              className="h-full w-full object-contain"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-              }}
-            />
-          </div>
-          <div className="border-l border-white/20 pl-3">
-            <h1 className="text-xs font-black text-white tracking-wider uppercase leading-tight">
-              Compliance
-            </h1>
-            <p className="text-[10px] font-bold text-teal-100 tracking-wider uppercase mt-0.5">
-              Dashboard
-            </p>
-          </div>
-        </div>
+        <h1 className="text-xs font-black text-white tracking-wider uppercase leading-tight">
+          Compliance Department
+        </h1>
+        <p className="text-[10px] font-bold text-teal-100 tracking-wider uppercase mt-0.5">
+          Dashboard
+        </p>
       </div>
 
       {/* Navigation Sections */}

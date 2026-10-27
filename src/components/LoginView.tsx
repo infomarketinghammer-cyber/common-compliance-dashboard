@@ -18,6 +18,11 @@ interface LoginViewProps {
   onLoginSuccess: (user: User) => void;
 }
 
+const QUICK_ACCESS = [
+  { label: 'Admin', email: 'admin@gmail.com', password: 'Admin@123', icon: Crown },
+  { label: 'Employee', email: 'emp@gmail.com', password: 'Emp@123', icon: Layers },
+];
+
 export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,28 +52,16 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between selection:bg-brand-gradient selection:text-white">
-      {/* Top Bar with Clean White Logo Header */}
+      {/* Top Bar */}
       <header className="bg-brand-gradient border-b border-teal-800/30 px-6 py-3.5 shadow-2xs text-white">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-28 flex items-center justify-center">
-              <img
-                src="/logo.jpeg"
-                alt="Brick Four Logo"
-                className="h-full w-full object-contain"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-            </div>
-            <div className="border-l border-white/20 pl-3">
-              <h1 className="text-xs font-black text-white tracking-wider uppercase leading-tight">
-                Legal Compliance
-              </h1>
-              <p className="text-[10px] font-bold text-teal-200 tracking-wider uppercase mt-0.5">
-                KRA & KPI Performance Management Portal
-              </p>
-            </div>
+          <div>
+            <h1 className="text-xs font-black text-white tracking-wider uppercase leading-tight">
+              Compliance Department Dashboard
+            </h1>
+            <p className="text-[10px] font-bold text-teal-200 tracking-wider uppercase mt-0.5">
+              KRA & KPI Performance Management Portal
+            </p>
           </div>
         </div>
       </header>
@@ -106,7 +99,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
                   aria-label="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="e.g. dwarka@brickfour.com"
+                  placeholder="e.g. admin@gmail.com"
                   className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all font-mono font-medium"
                 />
               </div>
@@ -153,12 +146,40 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
               )}
             </button>
           </form>
+
+          {/* Quick Access */}
+          <div className="mt-6 pt-5 border-t border-slate-200">
+            <p className="text-[10px] font-bold tracking-widest text-slate-500 uppercase mb-2.5">Quick Access</p>
+            <div className="space-y-2">
+              {QUICK_ACCESS.map(({ label, email: qEmail, password: qPassword, icon: Icon }) => (
+                <button
+                  key={qEmail}
+                  type="button"
+                  onClick={() => {
+                    setEmail(qEmail);
+                    setPassword(qPassword);
+                    setErrorMessage('');
+                  }}
+                  className="w-full flex items-center gap-3 p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition-all text-left cursor-pointer"
+                >
+                  <Icon className="w-4 h-4 text-indigo-600 shrink-0" />
+                  <div className="flex-1 min-w-0 text-xs">
+                    <div className="font-bold text-slate-800">{label}</div>
+                    <div className="font-mono text-slate-500 truncate">
+                      {qEmail} / {qPassword}
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-400 shrink-0" />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-3 px-6 text-center text-xs text-slate-500">
-        Brick Four Compliance Department • Confidential Performance Management Portal
+        Compliance Department Dashboard • Confidential Performance Management Portal
       </footer>
     </div>
   );
